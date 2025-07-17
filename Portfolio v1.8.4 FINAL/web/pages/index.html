@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Techne Multimedia Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #5b5b5b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #ececec;
+            --bg-dark: #a7a7a7;
+            --container-max-width: 1200px;
+            --container-padding: clamp(1rem, 5vw, 2rem);
+            --section-padding: clamp(2rem, 8vw, 4rem);
+            --gap-small: clamp(0.5rem, 2vw, 1rem);
+            --gap-medium: clamp(1rem, 4vw, 2rem);
+            --gap-large: clamp(2rem, 6vw, 3rem);
+            --font-size-small: clamp(0.875rem, 2.5vw, 1rem);
+            --font-size-base: clamp(1rem, 3vw, 1.125rem);
+            --font-size-large: clamp(1.25rem, 4vw, 1.5rem);
+            --font-size-xl: clamp(1.5rem, 5vw, 2rem);
+            --font-size-2xl: clamp(2rem, 6vw, 2.5rem);
+            --font-size-3xl: clamp(2.5rem, 7vw, 3rem);
+            --border-radius-small: 0.25rem;
+            --border-radius-medium: 0.5rem;
+            --border-radius-large: 2rem;
+            --transition-fast: 0.15s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.6s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            width: 100%;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header-section {
+            background-color: var(--bg-secondary);
+            width: 100%;
+            padding-top: 80px; /* Adjust to match nav height */
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: var(--gap-medium) 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--gap-large);
+            flex-wrap: wrap;
+            backdrop-filter: blur(4px);
+        }
+
+        .nav-link {
+            font-size: var(--font-size-base);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color var(--transition-medium);
+            padding: var(--gap-small);
+            border-radius: var(--border-radius-small);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: all var(--transition-medium);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('../assets/images/img_image_1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--gap-medium);
+        }
+
+        .hero-logo {
+            max-width: min(90vw, 600px);
+            height: auto;
+            object-fit: contain;
+        }
+
+        .hero-icon {
+            max-width: min(20vw, 120px);
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: var(--section-padding) 0;
+        }
+
+        .content-row {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--gap-large);
+            margin-bottom: var(--gap-large);
+        }
+
+        .content-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .content-text {
+            flex: 1;
+            font-size: var(--font-size-large);
+            line-height: 1.6;
+            text-align: justify;
+            color: var(--text-primary);
+        }
+
+        .content-image {
+            flex: 1;
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: var(--border-radius-medium);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .closing-text {
+            font-size: var(--font-size-large);
+            line-height: 1.6;
+            text-align: justify;
+            color: var(--text-primary);
+            margin-top: var(--gap-large);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background-color: var(--bg-secondary);
+            padding: var(--section-padding) 0;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: var(--gap-small);
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 4px;
+            background-color: var(--bg-tertiary);
+            margin-bottom: var(--gap-large);
+            border-radius: var(--border-radius-small);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--gap-large);
+        }
+
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-medium);
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-medium);
+            padding: var(--gap-medium);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .project-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        .project-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-medium);
+        }
+
+        .project-description {
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        .learn-more-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-large);
+            padding: var(--gap-small) var(--gap-medium);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--gap-small);
+            min-height: 48px;
+            align-self: flex-start;
+        }
+
+        .learn-more-btn:hover,
+        .learn-more-btn:focus {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--bg-secondary);
+            padding: var(--section-padding) 0;
+        }
+
+        .profile-section {
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-medium);
+            padding: var(--gap-large);
+            margin: var(--gap-large) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--gap-large);
+        }
+
+        .profile-image {
+            width: clamp(150px, 25vw, 250px);
+            height: clamp(150px, 25vw, 250px);
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-medium);
+        }
+
+        .profile-name {
+            font-size: var(--font-size-3xl);
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .profile-title {
+            font-size: var(--font-size-large);
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .download-cv-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-large);
+            padding: var(--gap-small) var(--gap-medium);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--gap-small);
+            min-height: 48px;
+            align-self: flex-start;
+        }
+
+        .download-cv-btn:hover,
+        .download-cv-btn:focus {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--gap-large);
+            margin-top: var(--gap-large);
+        }
+
+        .about-left,
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-medium);
+        }
+
+        .about-divider-vertical {
+            width: 4px;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-small);
+            align-self: stretch;
+        }
+
+        .section-subtitle {
+            font-size: var(--font-size-2xl);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: var(--gap-medium);
+        }
+
+        .subsection-title {
+            font-size: var(--font-size-xl);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: var(--gap-small);
+        }
+
+        .about-description,
+        .education-text,
+        .skills-list {
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            margin-bottom: var(--gap-small);
+            padding-left: var(--gap-medium);
+            position: relative;
+        }
+
+        .skills-list li::before {
+            content: '🔹';
+            position: absolute;
+            left: 0;
+        }
+
+        .contacts-section {
+            margin-top: var(--gap-large);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            margin-bottom: var(--gap-medium);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--gap-small);
+            font-size: var(--font-size-base);
+            color: var(--text-light);
+        }
+
+        .contact-link {
+            color: var(--text-light);
+            text-decoration: underline;
+            transition: color var(--transition-medium);
+        }
+
+        .contact-link:hover,
+        .contact-link:focus {
+            color: var(--primary-color);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--gap-small);
+            margin-top: var(--gap-small);
+        }
+
+        .social-icon {
+            width: 56px;
+            height: 56px;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            border-radius: var(--border-radius-small);
+            padding: var(--gap-small);
+        }
+
+        .social-icon:hover,
+        .social-icon:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-dark);
+            padding: var(--section-padding) 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: var(--font-size-base);
+            color: white;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* New styles for repository button */
+        .repo-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: var(--border-radius-medium);
+            transition: all var(--transition-medium);
+            font-weight: 500;
+        }
+
+        .repo-button:hover,
+        .repo-button:focus {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-divider-vertical {
+                width: 100%;
+                height: 4px;
+            }
+            
+            .hero-section {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                gap: var(--gap-medium);
+                padding: var(--gap-small) 0;
+            }
+            
+            .content-row {
+                flex-direction: column;
+                gap: var(--gap-medium);
+            }
+            
+            .content-row.reverse {
+                flex-direction: column;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-item {
+                margin-bottom: var(--gap-medium);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navigation {
+                flex-direction: column;
+                gap: var(--gap-small);
+            }
+            
+            .hero-section {
+                min-height: 50vh;
+            }
+            
+            .section-title {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 320px) {
+            :root {
+                --container-padding: 1rem;
+                --section-padding: 1.5rem;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero-section {
+                background-image: url('../assets/images/img_image_1.png');
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-link,
+            .learn-more-btn,
+            .download-cv-btn,
+            .social-icon {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .nav-link::after {
+                display: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .navigation,
+            .learn-more-btn,
+            .download-cv-btn,
+            .social-icons {
+                display: none;
+            }
+            
+            .hero-section {
+                background: none;
+                color: black;
+            }
+            
+            .main-container {
+                box-shadow: none;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .keyboard-navigation *:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Image lazy loading placeholder */
+        img[loading="lazy"] {
+            background: var(--bg-tertiary);
+        }
+    </style>
+<script type="module" src="Blank"></script>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <!-- Navigation -->
+            <nav class="navigation" role="navigation" aria-label="Main navigation">
+                <a href="#home" class="nav-link" id="home-link">Home</a>
+                <a href="#about" class="nav-link" id="about-link">About</a>
+                <a href="#projects" class="nav-link" id="projects-link">Projects</a>
+                <a href="repository.html" class="nav-link" id="repository-link">Repository</a>
+            </nav>
+
+            <!-- Hero Section -->
+            <div class="hero-section" id="home">
+                <div class="hero-overlay">
+                    <img src="../assets/images/img_download14_1.png" alt="Techne Logo" class="hero-logo" loading="eager" />
+                    <img src="../assets/images/img_download25_1.png" alt="Techne Icon" class="hero-icon" loading="eager" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="container">
+                <div class="content-row">
+                    <div class="content-text">
+                        Techne, an independent digital studio where entertainment, multimedia arts, and computing come together in a seamless blend of creativity and technology. As a one-person team, I wear many hats—developing interactive games, designing user interfaces, building mobile and web applications, engineering audio, and producing multimedia experiences that are both visually captivating and technically refined. My work spans the entire digital pipeline—from game design and programming to analog media and audio engineering. Every project is a hands-on exploration of storytelling, interactivity, and innovation.
+                    </div>
+                    <img src="../assets/images/img_image_2.png" alt="Digital workspace" class="content-image" loading="lazy" />
+                </div>
+
+                <div class="content-row reverse">
+                    <div class="content-text">
+                        At Techne, I strive to create digital experiences that not only function well but resonate with users—emotionally, visually, and intellectually. Whether it's crafting immersive gameplay, designing intuitive app interfaces, or producing multimedia content that tells a story, I approach each challenge with a commitment to artistic integrity and technical precision. My process is fueled by curiosity, driven by problem-solving, and grounded in a deep love for learning and experimentation. I actively integrate tools like GitHub for version control, Vercel for deployment, and prioritize simplicity, accessibility, and elegance in every design decision.
+                    </div>
+                    <img src="../assets/images/img_image_3.png" alt="Creative process" class="content-image" loading="lazy" />
+                </div>
+
+                <div class="closing-text">
+                    Digital creation is not just about building things—it's about expressing ideas, evoking emotion, and making meaningful connections through technology. Techne is my personal space to explore that belief, turning imagination into experiences that inform, inspire, and entertain.
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="projects-section section" id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="section-divider"></div>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Project cards will be injected here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about-section section" id="about">
+            <div class="container">
+                <h2 class="section-title">About me</h2>
+                <div class="section-divider"></div>
+
+                <div class="profile-section">
+                    <img src="../assets/images/img_img20250520014054_1.png" alt="Briant Fred-Rey Jose Ongoy" class="profile-image" loading="lazy" />
+                    <div class="profile-info">
+                        <h1 class="profile-name">Briant Fred-Rey Jose Ongoy</h1>
+                        <p class="profile-title">Sole Developer | Independent Multimedia Artist | Techne CEO & Founder</p>
+                        <a class="download-cv-btn" href="../assets/cv_briant_ongoy.pdf" download aria-label="Download CV">
+                            <span class="cv-btn-text">DOWNLOAD CV</span>
+                            <img src="../assets/images/img_image_8.png" alt class="cv-btn-icon" aria-hidden="true" />
+                        </a>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-left">
+                        <h3 class="section-subtitle">About me</h3>
+                        <div class="about-description">
+                            I'm a passionate student and digital creator currently studying Bachelor of Science in Entertainment and Multimedia Computing at University of Mindanao Main Branch. I specialize in designing and developing interactive experiences from games and apps to multimedia content that combines technology and artistic storytelling.<br /><br />
+                            As a one-person studio, I work across multiple disciplines including game development, UI/UX design psychological research and design, mobile/web development, and audio production. I enjoy taking ideas from scratch and building them into working digital experiences—whether it's a focused utility app or a stylized game with immersive sound and animation. My creative and technical interests meet at the intersection of functionality and expression.
+                        </div>
+                        
+                        <h4 class="subsection-title">Education</h4>
+                        <div class="education-text">
+                            <strong>Bachelor of Science in Entertainment and Multimedia Computing</strong><br />
+                            University of Mindanao<br /><br />
+                            Focused on game development, app design, animation, UI/UX, and digital audio.<br />
+                            Built solo and group projects including games, mobile tools, and design prototypes.<br /><br />
+                            <strong>Key Milestones:</strong><br />
+                            2022: Built my first game prototype in Unity<br />
+                            2023: Created Techne as my personal studio/brand<br />
+                            2024: Released a Digital Audio Workstation Plugin<br />
+                            2025: Developed a capstone project focused on cognitive training and mental focus<br />
+                            2025: Designed and launched this personal portfolio site
+                        </div>
+                    </div>
+
+                    <div class="about-divider-vertical"></div>
+
+                    <div class="about-right">
+                        <h3 class="section-subtitle">What I do</h3>
+                        <ul class="skills-list">
+                            <li>Game Design & Development (Unity, C#)</li>
+                            <li>UI/UX Design (Figma, Adobe XD, Photoshop)</li>
+                            <li>App and Web Development (HTML, CSS, JS)</li>
+                            <li>Audio Engineering (FL Studio, Audacity)</li>
+                            <li>Prototyping, Creative Coding, and Digital Experiments</li>
+                            <li>Motion Graphics & Multimedia Storytelling</li>
+                        </ul>
+                        
+                        <div class="contacts-section">
+                            <h4 class="subsection-title">Contacts</h4>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <img src="../assets/images/img_image_10.png" alt="Phone" class="contact-icon" />
+                                    <a href="tel:09933640725" class="contact-link">09933640725</a>
+                                </div>
+                                <div class="contact-item">
+                                    <img src="../assets/images/img_image_11.png" alt="Email" class="contact-icon" />
+                                    <a href="mailto:bryn.inbox@gmail.com" class="contact-link">bryn.inbox@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <h5 class="subsection-title">Connections</h5>
+                            <div class="social-icons">
+                                <a href="https://linkedin.com/in/briant-ongoy" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile">
+                                    <img src="../assets/images/img_image_5.png" alt="LinkedIn" class="social-icon" />
+                                </a>
+                                <a href="https://github.com/BriantUM0410" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile">
+                                    <img src="../assets/images/img_image_12.png" alt="GitHub" class="social-icon" />
+                                </a>
+                                <a href="https://Facebook.com/briant_ongoy" target="_blank" rel="noopener noreferrer" aria-label="Open Facebook profile">
+                                    <img src="../assets/images/img_image_7.png" alt="Facebook" class="social-icon" />
+                                </a>
+                                <a href="https://instagram.com/briant.ongoy" target="_blank" rel="noopener noreferrer" aria-label="Open Instagram profile">
+                                    <img src="../assets/images/img_image_14.png" alt="Instagram" class="social-icon" />
+                                </a>
+                                <a href="https://fiverr.com/users/briant_ongoy" target="_blank" rel="noopener noreferrer" aria-label="Open Fiverr profile">
+                                    <img src="../assets/images/img_image_13.png" alt="Fiverr" class="social-icon" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="footer-text">
+                    © Techne 2025. No rights reserved. You are free to use, modify, or share any content on this portfolio without restriction.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <a href="repository.html" class="repo-button">
+        <span>View Repository</span>
+    </a>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    // Only prevent default for internal section links
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                        // Update active state
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                    // For links to other pages (like repository.html), let browser navigate normally
+                });
+            });
+        });
+
+        // CV download functionality
+        function downloadCV() {
+            alert('CV download initiated! In a real implementation, this would download the actual CV file.');
+        }
+
+        // Social media links
+        function openSocialLink(platform) {
+            const socialLinks = {
+                'linkedin': 'https://linkedin.com/in/briant-ongoy',
+                'github': 'https://github.com/briant-ongoy',
+                'twitter': 'https://twitter.com/briant_ongoy',
+                'instagram': 'https://instagram.com/briant.ongoy',
+                'discord': 'https://discord.com/users/briant_ongoy'
+            };
+
+            const url = socialLinks[platform];
+            if (url) {
+                alert(`Opening ${platform.charAt(0).toUpperCase() + platform.slice(1)} profile...\n\nURL: ${url}`);
+            }
+        }
+
+        // Responsive image loading
+        function loadImages() {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('loading');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Initialize responsive features
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImages();
+            
+            // Add touch support for social icons
+            const socialIcons = document.querySelectorAll('.social-icon');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Responsive navigation for mobile
+        function handleResize() {
+            const nav = document.querySelector('.navigation');
+            if (window.innerWidth <= 768) {
+                nav.classList.add('mobile');
+            } else {
+                nav.classList.remove('mobile');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial check
+
+        // Performance optimization: debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Smooth scroll with fallback
+        function smoothScrollTo(element) {
+            if ('scrollBehavior' in document.documentElement.style) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // Fallback for browsers that don't support smooth scrolling
+                const targetPosition = element.offsetTop;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 1000;
+                let start = null;
+
+                function animation(currentTime) {
+                    if (start === null) start = currentTime;
+                    const timeElapsed = currentTime - start;
+                    const run = ease(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+
+                function ease(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t + b;
+                    t--;
+                    return -c / 2 * (t * (t - 2) - 1) + b;
+                }
+
+                requestAnimationFrame(animation);
+            }
+        }
+
+        // Modular Block - Project data
+        const projects = [
+            {
+                id: 'neurosync',
+                title: 'NeuroSync – Cognitive Focus App',
+                type: 'UI/UX Research + App Prototype',
+                tools: 'Figma, Unity, Psychology-based design',
+                description: 'A minimalist mobile game app designed to help users improve concentration and mental focus. Built with clean UI, low overstimulation design principles, and backed by psychology research on cognitive training. Designed as part of a capstone project.',
+                link: 'https://your-neurosync-demo-link.com'
+            },
+            {
+                id: 'crazybazz',
+                title: 'CRAZYBAZZ – FL Studio Mastering Plugin Demo',
+                type: 'Audio Engineering / Sound Design',
+                tools: 'FL Studio, Maximus, FabFilter, Serum',
+                description: 'An original audio mastering chain built for hardbass, dubstep music production. Includes a demo sound pack and a detailed walkthrough of how EQ, compression, and stereo shaping are used in a plugin-like setup to simulate professional mastering workflows.',
+                link: 'https://your-crazybazz-demo-link.com'
+            },
+            {
+                id: 'dokidoki',
+                title: 'Doki Doki Chess Club – 2D Dating Sim Game',
+                type: 'Game Development / Narrative Design',
+                tools: 'Unity, C#, Digital Art, Narrative Design',
+                description: 'Combines classic visual novel mechanics with light strategy and humor. Features original character art, branching dialogue, and a custom dialogue system. Inspired by titles like Doki Doki Literature Club, but with a fresh and comedic take. Built solo as a creative experiment in blending narrative, gameplay, and chess logic.',
+                link: 'https://your-dokidoki-demo-link.com'
+            },
+            {
+                id: 'more',
+                title: 'More Projects Coming Soon',
+                type: '',
+                tools: '',
+                description: 'Currently working on several exciting projects including web applications, mobile games, and multimedia installations. Stay tuned for updates!',
+                link: '#'
+            },
+            {
+                id: 'coming-soon',
+                title: 'Coming Soon',
+                type: '',
+                tools: '',
+                description: 'Stay tuned for more updates on upcoming projects!',
+                link: '#'
+            },
+            {
+                id: 'coming-soon',
+                title: 'Coming Soon',
+                type: '',
+                tools: '',
+                description: 'Stay tuned for more updates on upcoming projects!',
+                link: '#'
+            }
+        ];
+
+        // Render projects
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+            projects.forEach(project => {
+                const item = document.createElement('div');
+                item.className = 'project-item';
+                item.innerHTML = `
+                    <div class="project-placeholder">Project Image</div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            <strong>${project.title}</strong><br /><br />
+                            ${project.type ? `Type: ${project.type}<br />` : ''}
+                            ${project.tools ? `Tools: ${project.tools}<br /><br />` : ''}
+                            ${project.description}
+                        </div>
+                        <a class="learn-more-btn" href="${project.link}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${project.title}">
+                            <span class="btn-text">Learn More</span>
+                            <img src="../assets/images/img_image_15.png" alt class="btn-icon" aria-hidden="true" />
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
+</body>
+</html>
