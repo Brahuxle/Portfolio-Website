@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Techne Repository</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* If you use a separate CSS file, you can remove this block */
+        :root {
+            --primary-color: #5b5b5b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #ececec;
+            --bg-dark: #a7a7a7;
+            --container-max-width: 1200px;
+            --container-padding: clamp(1rem, 5vw, 2rem);
+            --section-padding: clamp(2rem, 8vw, 4rem);
+            --gap-small: clamp(0.5rem, 2vw, 1rem);
+            --gap-medium: clamp(1rem, 4vw, 2rem);
+            --gap-large: clamp(2rem, 6vw, 3rem);
+            --font-size-base: clamp(1rem, 3vw, 1.125rem);
+            --font-size-3xl: clamp(2.5rem, 7vw, 3rem);
+            --border-radius-medium: 0.5rem;
+            --border-radius-large: 2rem;
+            --transition-medium: 0.3s ease;
+        }
+        body {
+            font-family: Inter, system-ui, -apple-system, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            width: 100%;
+        }
+        .main-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-section {
+            background-color: var(--bg-secondary);
+            width: 100%;
+            padding-top: 80px;
+        }
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: var(--gap-medium) 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--gap-large);
+            flex-wrap: wrap;
+            backdrop-filter: blur(4px);
+        }
+        .nav-link {
+            font-size: var(--font-size-base);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color var(--transition-medium);
+            padding: var(--gap-small);
+            border-radius: 0.25rem;
+            position: relative;
+        }
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--primary-color);
+        }
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: var(--gap-small);
+        }
+        .section-divider {
+            width: 100%;
+            height: 4px;
+            background-color: var(--bg-tertiary);
+            margin-bottom: var(--gap-large);
+            border-radius: 0.25rem;
+        }
+        .repository-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--gap-large);
+        }
+        .repo-item {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-medium);
+            padding: var(--gap-medium);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-medium);
+        }
+        .repo-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        .repo-title {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .repo-description {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            margin-bottom: var(--gap-small);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .repo-link {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-large);
+            padding: var(--gap-small) var(--gap-medium);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--gap-small);
+            min-height: 44px;
+        }
+        .repo-link:hover,
+        .repo-link:focus {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+        }
+        .footer {
+            background-color: var(--bg-dark);
+            padding: var(--section-padding) 0;
+            text-align: center;
+        }
+        .footer-text {
+            font-size: var(--font-size-base);
+            color: white;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .navigation {
+                gap: var(--gap-medium);
+                padding: var(--gap-small) 0;
+            }
+            .repository-grid {
+                grid-template-columns: 1fr;
+            }
+            .repo-item {
+                margin-bottom: var(--gap-medium);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <!-- Navigation -->
+            <nav class="navigation" role="navigation" aria-label="Main navigation">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#projects" class="nav-link">Projects</a>
+                <a href="repository.html" class="nav-link active">Repository</a>
+            </nav>
+        </div>
+
+        <!-- Repository Section -->
+        <div class="section" id="repository">
+            <div class="container">
+                <h2 class="section-title">Repository</h2>
+                <div class="section-divider"></div>
+                <div class="repository-grid" id="repository-grid">
+                    <!-- Repository items will be injected here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="footer-text">
+                    © Techne 2025. No rights reserved. You are free to use, modify, or share any content on this portfolio without restriction.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Example repository data
+        const repositories = [
+            {
+                name: "Techne Portfolio Source",
+                description: "The complete source code for this portfolio website, including modular project and repository sections.",
+                link: "https://github.com/BriantUM0410/techne-portfolio"
+            },
+            {
+                name: "NeuroSync App",
+                description: "Repository for the NeuroSync cognitive focus app. Includes Unity project files, assets, and documentation.",
+                link: "https://github.com/BriantUM0410/neurosync-app"
+            },
+            {
+                name: "CRAZYBAZZ Mastering Plugin",
+                description: "Audio mastering plugin demo for FL Studio. Contains presets, source code, and sample packs.",
+                link: "https://github.com/BriantUM0410/crazybazz-plugin"
+            }
+            // Add more repositories as needed
+        ];
+
+        // Render repository items
+        function renderRepositories() {
+            const grid = document.getElementById('repository-grid');
+            grid.innerHTML = '';
+            repositories.forEach(repo => {
+                const item = document.createElement('div');
+                item.className = 'repo-item';
+                item.innerHTML = `
+                    <div class="repo-title">${repo.name}</div>
+                    <div class="repo-description">${repo.description}</div>
+                    <a class="repo-link" href="${repo.link}" target="_blank" rel="noopener noreferrer">
+                        View Repository
+                    </a>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderRepositories);
+
+        // Smooth scroll for internal links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const isSamePage = window.location.pathname.endsWith(href.split('#')[0]);
+                const hasHash = href.includes('#');
+                if (isSamePage && hasHash) {
+                    e.preventDefault();
+                    const targetId = href.split('#')[1];
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                // If not same page, let browser navigate normally
+            });
+        });
+    </script>
+</body>
+</html>

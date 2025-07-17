@@ -1,0 +1,148 @@
+:root {
+    --primary-color: #5b5b5b;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --transition-medium: 0.3s ease;
+    --border-radius-medium: 0.5rem;
+    --gap-medium: clamp(1rem, 4vw, 2rem);
+    --font-size-base: clamp(1rem, 3vw, 1.125rem);
+    --font-size-xl: clamp(1.5rem, 5vw, 2rem);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gap-medium);
+    width: clamp(320px, 80%, 1000px);
+    gap: min(2rem, 5vw);
+}
+
+.redirect-card {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: var(--gap-medium);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.redirect-title,
+h1 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--gap-medium);
+}
+
+.redirect-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--gap-medium);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.redirect-link {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-medium);
+    transition: all var(--transition-medium);
+    font-weight: 500;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redirect-link:hover,
+.redirect-link:focus {
+    background-color: #4a4a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--bg-secondary);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--gap-medium);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .redirect-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .loading-spinner {
+        animation: none;
+    }
+    * {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles */
+.redirect-link:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Responsive Grid with auto-fit and minmax() */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Fluid Typography with clamp() */
+h1, .redirect-title {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Responsive Gaps Using min() or max() */
+.section, .container {
+    gap: min(2rem, 5vw);
+}
+
+/* Fluid Layouts with clamp() */
+/* The width property is already set above in .container, so this line can be removed */
